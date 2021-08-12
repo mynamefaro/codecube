@@ -1,10 +1,10 @@
 # Codecube
-<br/>
- |    |  |----  |      |----|  |----|<br/>
- |____|  |----  |      |    |  |    |<br/> 
- |    |  |----  |____  |____|  |____|<br/>
-<br/>
- Hello! Your Daddy already come back.
+
+|    |  |----  |      |----|  |----|<br/>
+|____|  |----  |      |    |  |    |<br/> 
+|    |  |----  |____  |____|  |____|<br/>
+
+ Hello! Your Daddy already come back.<br/>
  This Repository accommodates my "Codecube" task source code.
 
 ### How to install?
