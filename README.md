@@ -1,11 +1,11 @@
 # Codecube
-\
-\ |    |  |----  |      |----|  |----|
-\ |____|  |----  |      |    |  |    | 
-\ |    |  |----  |____  |____|  |____|
-\
-\ Hello! Your Daddy already come back.
-\ This Repository accommodates my "Codecube" task source code.
+<br/>
+ |    |  |----  |      |----|  |----|<br/>
+ |____|  |----  |      |    |  |    |<br/> 
+ |    |  |----  |____  |____|  |____|<br/>
+<br/>
+ Hello! Your Daddy already come back.
+ This Repository accommodates my "Codecube" task source code.
 
 ### How to install?
 1. Installing C/C++ compiler more than v11.0
