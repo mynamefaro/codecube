@@ -1,32 +1,42 @@
 #include<bits/stdc++.h>
-using lli=long long;
 using namespace std;
+using lli=long long;
+int A[100005],B[100005],buf[30];
 int main(){
-	int n;
-	scanf("%d",&n);
-	lli sumn=0;
-	vector<lli> nn,mm;
-	while(n--){
-		lli x;
-		scanf("%lld",&x);
-		nn.push_back(x);
-		sumn=sumn | x;
-	}
-	int m;
-	scanf("%d",&m);
-	lli summ=0;
-	while(m--){
-		lli x;
-		scanf("%lld",&x);
-		mm.push_back(x);
-		summ=summ | x;
-	}
-	printf("%lld",sumn^summ);
+	int a,b;
 	lli ans=0;
-	for(auto nnn:nn){
-		for(auto mmm:mm){
-			ans+=(nnn^mmm);
+	scanf("%d",&a);
+	for(int i=1;i<=a;++i)
+	{
+		scanf("%d",&A[i]);
+	} 
+	scanf("%d",&b);
+	for(int i=1;i<=b;++i)
+	{
+		scanf("%d",&B[i]);
+	}
+	
+	//for any B i th
+	for(int j=0;j<28;++j){
+		for(int i=1;i<=b;++i)
+		{
+			if(!(B[i]&(1<<j))){
+				++buf[j];
+			}
+		}
+	}
+	//for any A i th
+	for(int i=1;i<=a;++i)
+	{
+		for(int j=0;j<28;++j)
+		{
+			if(!(A[i]&(1<<j))){
+				ans+=(lli)(b-buf[j])*(lli)(1<<j);
+			}else{
+				ans+=(lli)(buf[j])*(lli)(1<<j);
+			}
 		}
 	}
 	printf("%lld",ans);
 }
+

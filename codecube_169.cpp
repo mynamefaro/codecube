@@ -1,76 +1,50 @@
 #include<bits/stdc++.h>
 using namespace std;
 using lli=long long;
-int P=1e9+7;
-bool notprime[1000004];
-vector <int> prime;
-int memo[100002];
-lli hashm[1000004];
-int factor(int n){
-	int m=n;
-	if(n==1) return 1;
-	if(memo[m]==0){
-		int ans=1;
-		for(auto p:prime){
-			if(n<p) break;
-			int cnt=1;
-			while(n%p==0){
-				n/=p;
-				++cnt;
-			}
-			ans*=cnt;
-		}
-		memo[m]=ans;
+int fac[100002],P=1e9+7;
+bool check(int mid,lli hash,int N[],int n,int m){
+	if(mid==0) return true;
+	lli H=0,pow=1;
+	for(int i=0;i<mid;++i){
+		H*=P;
+		H+=N[i];
+		if(i>0) pow*=P;
 	}
-	return memo[m];
-	//return ans;
-}
-bool check(int l,int arrn[],int n){
-	lli hash=0;
-	int PP=1;
-	for(int i=0;i<l;++i){
-		hash*=P;
-		hash+=factor(arrn[i]);
-		if(i>0) PP*=P;
-	}
-	for(int i=l-1;i<n;++i){
-		if(i>=l){
-			hash-=(factor(arrn[i-l]))*PP;
-			hash*=P;
-			hash+=factor(arrn[i]);
-		}
-		if(hash==hashm[l]) return true;
+	if(H==hash) return true;
+	for(int i=mid;i<n-m+mid;++i){
+		H-=N[i-mid]*pow;
+		H*=P;
+		H+=N[i];
+		if(H==hash) return true;
 	}
 	return false;
 }
 int main(){
-	prime.push_back(2);
-	notprime[2]=true;
-	for(int i=3;i<=100000;i+=2){
-		if(!notprime[i]){
-			prime.push_back(i);
-			for(int j=3*i;j<=100000;j+=(2*i)) notprime[j]=true;
+	for(int i=2;i<=100001;++i){
+		for(int j=i;j<=100001;j+=i){
+			++fac[j];
 		}
 	}
 	int n,m;
 	scanf("%d%d",&n,&m);
-	int ans=0;int a=0;
-	int arrn[n],arrm[m];
-	for(int i=0;i<n;++i){
-		scanf("%d",&arrn[i]);
-	}
-	lli hash=0;
-	for(int i=0;i<m;++i){
-		scanf("%d",&arrm[i]);
-		hash*=P;
-		hash+=factor(arrm[i]);
-		hashm[i+1]=hash;
-	}
 	int ans=0;
-	int l=1,r=n;
+	lli H[n+1];
+	int N[n],M[m];
+	int l=1,r=m;
+	H[0]=(long long) 0;
+	for(int i=0;i<n;++i){
+		scanf("%d",&N[i]);
+		N[i]=fac[N[i]];
+	}
+	for(int i=0;i<m;++i){
+		scanf("%d",&M[i]);
+		M[i]=fac[M[i]];
+		H[i+1]=H[i]*P;
+		H[i+1]+=M[i];
+	}
 	while(l<=r){
 		int mid=(l+r)/2;
-		if(check(mid,arrn,n)){
+		if(check(mid,H[mid],N,n,m)){
 			l=mid+1;
 			ans=max(ans,mid);
 		}else{
@@ -79,4 +53,3 @@ int main(){
 	}
 	printf("%d",ans);
 }
-
